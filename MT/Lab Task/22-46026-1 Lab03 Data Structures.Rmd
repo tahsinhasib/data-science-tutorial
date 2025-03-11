@@ -1,0 +1,140 @@
+---
+title: "R Notebook"
+author: "Md. Tahsin Hasib"
+date: "`r Sys.Date()`"
+output: html_notebook
+---
+
+```{r}
+print("Data Structures in R")
+```
+```{r}
+# Creating Different Types of Vectors
+# Numeric Vector
+num_vec <- c(9, 2, 1, 7, 0)
+print(num_vec)
+
+test_vec <- c(10,20,30,40)
+print(test_vec)
+```
+
+
+```{r}
+# Character Vector
+char_vec <- c("CSE", "EEE", "BBA")
+print(char_vec)
+```
+```{r}
+# Logical Vector
+log_vec <- c(TRUE, FALSE, TRUE, FALSE, TRUE)
+print(log_vec)
+```
+
+```{r}
+# Vector Operations
+# Arithmetic Operations
+vec1 <- c(10, 20, 30)
+vec2 <- c(5, 10, 15)
+
+sum_vec <- vec1 + vec2  # Element-wise addition
+prod_vec <- vec1 * vec2 # Element-wise multiplication
+div_vec <- vec1/vec2 # Element-wise division
+sub_vec <- vec1-vec2 # Element-wisw substraction
+
+print(sum_vec)   # Output: 3 7 11
+print(prod_vec)
+print(div_vec)
+print(sub_vec)
+```
+```{r}
+# Accessing Elements in a Vector
+# Create a vector
+num_vec <- c(11, 22, 33, 44, 55)
+
+# Access elements using index (1-based index)
+print(num_vec[3])  # Output: 20
+```
+
+```{r}
+# Access multiple elements
+print(num_vec[c(1, 3, 5)])  # Output: 10 30 50
+
+```
+
+```{r}
+# Access elements using a condition
+print(num_vec[num_vec > 25])  # Output: 30 40 50
+```
+
+
+```{r}
+# Modifying a Vector
+# Modify an element
+num_vec[2] <- 50
+print(num_vec)  # Output: 10 100 30 40 50
+```
+
+
+```{r}
+print(num_vec)
+```
+
+```{r}
+# Append new elements
+num_vec <- c(num_vec, 66, 77, 100, 25) # value changed
+print(num_vec)  # Output: 10 100 30 40 50 60 70
+```
+
+```{r}
+# Vector Functions
+vec <- c(25, 33, 12, 21, 27, 37)
+
+# Length of the vector
+print(length(vec))  # Output: 5
+```
+
+```{r}
+# Sum of all elements
+print(sum(vec))  # Output: 75
+```
+
+
+```{r}
+# Mean (average) of elements
+print(mean(vec))  
+```
+
+```{r}
+# Sorting a vector
+sorted_vec <- sort(vec, decreasing = TRUE)
+print("decreasing order")
+print(sorted_vec)  
+print("non decreasing order")
+sorted_vec <- sort(vec, decreasing = FALSE)
+print(sorted_vec)
+```
+
+```{r}
+# Sequence and Repetition in Vectors
+# Sequence from 1 to 10
+seq_vec <- seq(1, 10, by = 2)  # Steps of 2
+print(seq_vec)  # Output
+seq_test <- seq(1, 10, by = 3)
+print(seq_vec)
+```
+# Matrices
+
+
+```{r}
+# Creating a 3x3 matrix (filled column-wise by default)
+mat <- matrix(1:10, nrow = 2, ncol = 5)
+print(mat)
+```
+
+```{r}
+# Filling a Matrix Row-Wise
+mat <- matrix(1:4, nrow = 4, byrow = TRUE)
+print(mat)
+
+```
+
