@@ -292,92 +292,117 @@ apply(arr, MARGIN = 2, FUN = mean)
 ```{r}
 # Creating a simple data frame
 df <- data.frame(
-  ID = c(1, 2, 3, 4),
-  Name = c("Tahsin", "Mansib", "Rahi", "Prottoy"),
-  Age = c(23, 25, 23, 24),
-  Score = c(89.5, 76.0, 91.2, 88.8),
-  Passed = c(TRUE, FALSE, TRUE, TRUE)
+  Job_ID = c(1, 2, 3, 4),
+  Employee_Name = c("Tahsin", "Mansib", "Rahi", "Prottoy"),
+  Employee_Age = c(23, 25, 23, 24),
+  Position = c("Developer", "Quality Assurance", "Business Analyst", "Tester"),
+  Salary = c(15000, 20000, 25000, 10000),
+  Join_Year = c(2022, 2025, 2020, 2022)
 )
 
 # Print the data frame
 print(df)
 ```
+# Added more columns
+
+```{r}
+df$Project_Name <- c("Project Alpha", "Project Beta", "Project Gamma", "Project Delta")
+df$Years_of_Experience <- c(1, 3, 5, 1)
+```
+
+
+
+```{r}
+print(df)
+```
+
 
 ```{r}
 # Accessing Elements in a Data Frame
 # Access a single column
-print(df$Name)  # Output: Alice Bob Charlie David
-print(df$ID)
-print(df$Score)
+print(df$Employee_Name)  # Output: Alice Bob Charlie David
+print(df$Job_ID)
+print(df$Employee_Age)
+print(df$Salary)
 ```
 
 ```{r}
 # Access a specific row (row 2)
 print(df[2, ])  
+print(df[4, ])  
 ```
 
 ```{r}
 # Access a specific element (Row 3, Column "Score")
-print(df[3, "Score"])  # Output: 91.2
+print(df[3, "Position"])  # Output: 91.2
 ```
 
 ```{r}
 # Access multiple columns
-print(df[, c("Name", "Score")])  
+print(df[, c("Employee_Name", "Position", "Salary")])
+
+print(df[,c("Employee_Name","Employee_Age")])
 ```
 
 ```{r}
 # Access multiple rows
 print(df[1:2, ])  # First two rows
+
+print(df[3:6, ])  # 3 to 6 however there are only 4 people
 ```
 
 ```{r}
-# Add a new column 'Grade'
-df$Grade <- c("A", "B", "A+", "A-")
-print(df)
+df$Working_Status <- c(TRUE, TRUE, FALSE, FALSE)
 ```
+
+
 
 ```{r}
 # Filter students who passed
-passed_students <- df[df$Passed == TRUE, ]
-print(passed_students)
+Working_Emp <- df[df$Working_Status == TRUE, ]
+print(Working_Emp)
 
 ```
 
 ```{r}
 # Filter students with Score > 85
-high_scorers <- df[df$Score > 90, ]
-print(high_scorers)
+High_Salary <- df[df$Salary > 15000, ]
+print(High_Salary)
 ```
 
 ```{r}
 # Sorting by Age (Ascending)
-df_sorted <- df[order(df$Age), ]
+df_sorted <- df[order(df$Employee_Age)]
 print(df_sorted)
 ```
 
 ```{r}
 # Sorting by Score (Descending)
-df_sorted_desc <- df[order(-df$Score), ]
+df_sorted_desc <- df[order(-df$Salary), ]
 print(df_sorted_desc)
 ```
 
 ```{r}
 # Changing a value (Changing Bob’s Score to 80)
-df$Score[df$Name == "Tahsin"] <- 80
+df$Salary[df$Employee_Name == "Tahsin"] <- 50000
 print(df)
 
 ```
 
 ```{r}
+print(df)
+```
+
+
+```{r}
 # Renaming column names
-colnames(df) <- c("Student_ID", "Student_Name", "Student_Age", "Exam_Score", "Passed_Exam", "Final_Grade")
+colnames(df) <- c("J_ID", "Emp_Name", "Emp_Age", "Pos", "Sal", "Join_yr", "Proj_Name", "YOE", "WS")
 print(df)
 ```
 
 ```{r}
 # Remove a column
-df$Grade <- NULL
+df$WS <- NULL
 print(df)
 ```
 
@@ -402,10 +427,10 @@ str(df)
 ```{r}
 # Creating a list with different data types
 my_list <- list(
-  Name = "Tahsin",
-  Age = 24,
-  Scores = c(90, 85, 88),
-  Passed = TRUE
+  Emp_Name = "Tahsin",
+  Emp_Age = 24,
+  Sal = 75000,
+  WS = TRUE
 )
 
 # Print the list
@@ -419,12 +444,12 @@ print(my_list[[1]])  # Output: "Alice"
 
 ```{r}
 # Access by name
-print(my_list$Scores)  # Output: 90 85 88
+print(my_list$Sal)  # Output: 90 85 88
 ```
 
 ```{r}
 # Access specific elements within a list item
-print(my_list$Scores[2])  # Output: 85
+print(my_list$Sal[1])  # Output: 85
 ```
 
 ```{r}
@@ -441,8 +466,8 @@ print(my_list)
 
 ```{r}
 # Remove an element
-my_list$Passed <- NULL
-my_list$Scores <- NULL
+my_list$Emp_age <- NULL
+my_list$Sal <- NULL
 print(my_list)
 ```
 
@@ -477,7 +502,10 @@ print(merged_list)
 list_to_df <- data.frame(
   Name = c("X", "Y"),
   Age = c(25, 27),
-  Score = c(100, 50)
+  Score = c(100, 50),
+  Sal = 75000,
+  WS = TRUE,
+  Pos = "Developer"
 )
 
 print(list_to_df)
