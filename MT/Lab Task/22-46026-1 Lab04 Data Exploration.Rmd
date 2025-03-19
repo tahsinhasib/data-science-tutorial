@@ -1,0 +1,222 @@
+---
+title: "Data Exploration"
+author: "Md. Tahsin Hasib"
+date: "`r Sys.Date()`"
+output:
+  html_notebook: default
+  pdf_document: default
+---
+
+# Univariate Exploration
+
+# Load the Iris Dataset
+```{r}
+# Load dataset
+data(iris)
+
+# View first few rows
+head(iris)
+
+
+
+```
+
+
+
+
+# Summary Statistics
+```{r}
+# Summary of numeric variables
+print("iris summary")
+summary(iris)
+
+```
+# Univariate Plots
+```{r}
+# Histogram (Distribution of a Numeric Variable)
+# Histogram of Sepal Length
+hist(iris$Sepal.Length, 
+     main="Histogram of Sepal Length", 
+     col="lightblue", 
+     xlab="Sepal Length", 
+     border="black")
+
+# Histogram of Sepal Width
+hist(iris$Sepal.Width, 
+     main="Histogram of Sepal Width", 
+     col="green", 
+     xlab="Sepal Length", 
+     border="black")
+
+# Histogram of Petal Length
+hist(iris$Petal.Length, 
+     main="Histogram of Petal Length", 
+     col="red", 
+     xlab="Petal Length", 
+     border="black")
+
+
+# Histogram of Petal Wisth
+hist(iris$Petal.Width, 
+     main="Histogram of Petal Width", 
+     col="blue", 
+     xlab="Petal Width", 
+     border="black")
+
+```
+```{r}
+# Density plot of Petal Length
+# Density Plot (Smooth Distribution)
+plot(density(iris$Petal.Length), 
+     main="Density Plot of Petal Length", 
+     col="blue", 
+     lwd=2)
+
+plot(density(iris$Petal.Width), 
+     main="Density Plot of Petal Width", 
+     col="red", 
+     lwd=2)
+
+
+plot(density(iris$Sepal.Length), 
+     main="Density Plot of Sepal Length", 
+     col="green", 
+     lwd=2)
+
+
+plot(density(iris$Sepal.Width), 
+     main="Density Plot of Sepal Width", 
+     col="black", 
+     lwd=2)
+
+
+```
+```{r}
+# Box Plot (Identifying Outliers)
+# Boxplot of Sepal Width
+boxplot(iris$Sepal.Width, 
+        main="Box Plot of Sepal Width", 
+        col="orange")
+
+
+boxplot(iris$Sepal.Length, 
+        main="Box Plot of Sepal Length", 
+        col="brown")
+
+
+boxplot(iris$Petal.Width, 
+        main="Box Plot of Petal Width", 
+        col="blue")
+
+
+boxplot(iris$Petal.Length, 
+        main="Box Plot of Petal Length", 
+        col="pink")
+
+```
+# Exploring Categorical Data
+```{r}
+# Count of each species
+table(iris$Species)
+
+table(iris$Sepal.Length)
+table(iris$Sepal.Width)
+table(iris$Petal.Length)
+table(iris$Petal.Width)
+
+```
+
+```{r}
+# Bar plot for Species count
+barplot(table(iris$Species), 
+        main="Count of Each Species", 
+        col=c("pink", "orange", "green"))
+
+
+
+```
+# Multivariate Exploration
+# Scatter Plot (Numeric vs. Numeric)
+```{r}
+# Scatter plot: Sepal Length vs. Sepal Width
+plot(iris$Sepal.Length, iris$Sepal.Width, 
+     main="Scatter Plot of Sepal Length vs Sepal Width",
+     xlab="Sepal Length", ylab="Sepal Width",
+     col=iris$Species, pch=19)
+legend("topright", legend=levels(iris$Species), col=1:3, pch=19)
+
+# Scatter plot: Petal Length vs. Petal Width
+plot(iris$Petal.Length, iris$Petal.Width, 
+     main="Scatter Plot of Petal Length vs Petal Width",
+     xlab="Petal Length", ylab="Petal Width",
+     col=iris$Species, pch=15)
+legend("topright", legend=levels(iris$Species), col=1:3, pch=15)
+
+```
+
+# Correlation (Numeric vs. Numeric)
+```{r}
+# Correlation between Sepal Length and Petal Length
+cor(iris$Sepal.Length, iris$Petal.Length)
+
+
+# Correlation between Sepal Width and Petal Width
+cor(iris$Sepal.Width, iris$Petal.Width)
+
+```
+
+```{r}
+# Correlation matrix
+cor(iris[,1:4])
+
+```
+
+# Box Plot (Numeric vs. Categorical)
+```{r}
+# Box plot of Petal Length by Species
+boxplot(Petal.Length ~ Species, data=iris,
+        main="Box Plot of Petal Length by Species",
+        col=c("brown", "skyblue", "yellow"))
+
+
+boxplot(Petal.Width ~ Species, data=iris,
+        main="Box Plot of Petal Width by Species",
+        col=c("pink", "orange", "salmon"))
+
+
+boxplot(Sepal.Length ~ Species, data=iris,
+        main="Box Plot of Sepal Length by Species",
+        col=c("green", "navy", "purple"))
+
+
+boxplot(Sepal.Width ~ Species, data=iris,
+        main="Box Plot of Sepal Width by Species",
+        col=c("brown", "gray", "maroon"))
+
+```
+# Pair Plot (Multivariate Visualization)
+```{r}
+# Pair plot (Scatter plot matrix)
+pairs(iris[,1:4], col=iris$Species, pch=20)
+
+```
+# Using ggplot2 for Enhanced Visualization
+```{r}
+# Load ggplot2
+library(ggplot2)
+
+# Scatter plot with regression line
+ggplot(iris, aes(x=Sepal.Length, y=Petal.Length, color=Species)) +
+  geom_point() +
+  geom_smooth(method="lm", se=FALSE) +
+  ggtitle("Sepal Length vs Petal Length by Species")
+
+
+
+ggplot(iris, aes(x=Sepal.Width, y=Petal.Width, color=Species)) +
+  geom_point() +
+  geom_smooth(method="lm", se=FALSE) +
+  ggtitle("Sepal Length vs Petal Length by Species")
+
+```
+
