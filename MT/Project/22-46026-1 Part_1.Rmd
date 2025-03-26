@@ -1,0 +1,241 @@
+---
+title: "R Notebook"
+author: "Md. Tahsin Hasib"
+date: "`r Sys.Date()`"
+output: html_notebook
+---
+```{r}
+
+
+# custom made
+# https://drive.google.com/file/d/1w9lxCpn5SwyetVz_cUMG0LeHIb-vYpJ0/view?usp=drive_link
+
+# Read CSV from a URL
+url <- "https://drive.google.com/uc?export=download&id=1w9lxCpn5SwyetVz_cUMG0LeHIb-vYpJ0"
+df <- read.csv(url)
+
+df$Species <- as.factor(df$Species)
+
+# View first few rows
+head(df)
+
+```
+
+1. Data Exploration
+
+```{r}
+summary(df)
+```
+
+# Univariate Exploration
+
+
+```{r}
+# Univariate Plots
+# Histogram (Distribution of a Numeric Variable)
+
+
+# Histogram of Heart_Rate
+hist(df$Heart_Rate, 
+     main="Histogram of Heart Rate", 
+     col="purple", 
+     xlab="Heart Rate", 
+     border="black")
+
+# Histogram of Weight
+hist(df$Weight, 
+     main="Histogram of Weight", 
+     col="pink", 
+     xlab="Weight", 
+     border="black")
+
+# Histogram of Daily_Exercise_Hours
+hist(df$Daily_Exercise_Hours, 
+     main="Histogram of Daily Exercise Hours", 
+     col="skyblue", 
+     xlab="Daily Exercise Hours", 
+     border="black")
+
+```
+
+# Density Plot
+
+```{r}
+# Density plot of Petal Length
+# Density Plot (Smooth Distribution)
+
+# Heart Rate
+plot(density(df$Heart_Rate), 
+     main="Density Plot of Heart Rate", 
+     col="purple", 
+     lwd=2)
+
+
+# Weight
+plot(density(df$Weight), 
+     main="Density Plot of Weight", 
+     col="blue", 
+     lwd=2)
+
+
+# Daily Exercise Hours
+plot(density(df$Daily_Exercise_Hours), 
+     main="Density Plot of Daily Exercise Hours", 
+     col="red", 
+     lwd=2)
+
+
+```
+# Box Plot (Identifying Outliers)
+
+```{r}
+# Boxplot
+boxplot(df$Heart_Rate, 
+        main="Box Plot of Heart Rate", 
+        col="purple")
+
+
+boxplot(df$Weight, 
+        main="Box Plot of Weight", 
+        col="pink")
+
+
+boxplot(df$Daily_Exercise_Hours, 
+        main="Box Plot of Daily Exercise Hours", 
+        col="red")
+
+
+```
+# Exploring Categorical Data
+
+
+```{r}
+# Count of each species
+table(df$Species)
+
+table(df$Heart_Rate)
+table(df$Weight)
+table(df$Daily_Exercise_Hours)
+table(df$Health_Status)
+```
+
+
+
+# Bar plot for Species count
+
+```{r}
+# Bar plot for Species
+barplot(table(df$Species), 
+        main="Count of Each Species", 
+        col=c("purple", "pink", "skyblue"))
+```
+
+# Multivariate Exploration
+
+
+
+
+```{r}
+# Scatter Plot (Numeric vs. Numeric)
+
+# Map species to colors
+species_colors <- c("Elephant" = "pink", "Giraffe" = "skyblue", "Bear" = "purple")
+
+# Scatter plot: Heart Rate vs. Weight
+plot(df$Heart_Rate, df$Weight, 
+     main="Scatter Plot of Heart Rate vs Weight",
+     xlab="Heart Rate", ylab="Weight",
+     col=species_colors[df$Species], pch=19)
+legend("topright", legend=levels(df$Species), col=species_colors, pch=19)
+
+
+# Scatter plot: Heart Rate vs. Daily Exercise Hours
+plot(df$Heart_Rate, df$Daily_Exercise_Hours, 
+     main="Scatter Plot of Heart Rate vs Daily Exercise Hours",
+     xlab="Heart Rate", ylab="Daily Exercise Hours",
+     col=species_colors[df$Species], pch=19)
+legend("topright", legend=levels(df$Species), col=species_colors, pch=19)
+
+
+# Scatter plot: Weight vs. Daily Exercise Hours
+plot(df$Weight, df$Daily_Exercise_Hours, 
+     main="Scatter Plot of Weight vs Daily Exercise Hours",
+     xlab="Weight", ylab="Daily Exercise Hours",
+     col=species_colors[df$Species], pch=19)
+legend("topright", legend=levels(df$Species), col=species_colors, pch=19)
+
+```
+
+
+```{r}
+# Correlation (Numeric vs. Numeric)
+
+# Between Heart Rate and Weight
+cor(df$Heart_Rate, df$Weight)
+
+# Between Heart Rate and Weight
+cor(df$Heart_Rate, df$Daily_Exercise_Hours)
+
+# Between Weight and Daily Exercise
+cor(df$Weight, df$Daily_Exercise_Hours)
+```
+```{r}
+# Correlation matrix
+cor(df[,1:3])
+```
+# Box Plot (Numeric vs. Categorical)
+
+```{r}
+# Box plot
+
+# Heart Rate by Species
+boxplot(Heart_Rate ~ Species, data=df,
+        main="Box Plot of Heart Rate by Species",
+        col=c("purple", "pink", "skyblue"))
+
+
+# Weight by Species
+boxplot(Weight ~ Species, data=df,
+        main="Box Plot of Weight by Species",
+        col=c("purple", "pink", "skyblue"))
+
+
+# Daily Exercise Hours by Species
+boxplot(Daily_Exercise_Hours ~ Species, data=df,
+        main="Box Plot of Daily Exercise Hours by Species",
+        col=c("purple", "pink", "skyblue"))
+
+```
+
+```{r}
+# Pair Plot (Multivariate Visualization)
+# Pair plot (Scatter plot matrix)
+pairs(df[,1:3], col=species_colors, pch=20)
+```
+```{r}
+# Load ggplot2
+library(ggplot2)
+
+# Scatter plot with regression line
+
+ggplot(df, aes(x=Heart_Rate, y=Weight, color=Species)) +
+  geom_point() +
+  geom_smooth(method="lm", se=FALSE) +
+  ggtitle("Heart Rate vs Weight by Species")
+
+
+
+ggplot(df, aes(x=Heart_Rate, y=Daily_Exercise_Hours, color=Species)) +
+  geom_point() +
+  geom_smooth(method="lm", se=FALSE) +
+  ggtitle("Heart Rate vs Daily Exercise Hours by Species")
+
+
+ggplot(df, aes(x=Weight, y=Daily_Exercise_Hours, color=Species)) +
+  geom_point() +
+  geom_smooth(method="lm", se=FALSE) +
+  ggtitle("Weight vs Daily Exercise Hours by Species")
+
+```
+
+
