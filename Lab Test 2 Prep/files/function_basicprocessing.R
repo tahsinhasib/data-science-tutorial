@@ -7,7 +7,9 @@ library(SnowballC)
 library(textclean)
 
 # Load CSV
-df <- read_csv("C:/Github Repos/data-science-tutorial/Lab Test 2 Prep/src/dstar-copy-test.csv")
+df <- read_csv("C:/Github Repos/data-science-tutorial/Lab Test 2 Prep/src/dummy_articles.csv")
+# if i want to read from a text file
+# df <- readLines("C:/Github Repos/data-science-tutorial/Lab Test 2 Prep/src/dummy_articles.txt", warn = FALSE)
 
 # Function to expand contractions
 expand_contractions <- function(text) {
@@ -73,7 +75,6 @@ process_text <- function(text) {
 
 # Truncate the dataframe to maximum 3 rows
 df <- head(df, 3)
-
 # Apply the function to each row of the article_text column
 df$processed_text <- sapply(df$article_text, process_text)
 

@@ -16,7 +16,7 @@ library(reshape2)
 
 # Data preparation
 # Read the data
-data <- read_csv("C:/Github Repos/data-science-tutorial/Lab Test 2 Prep/src/dailystar_articles_with_text.csv", show_col_types = FALSE)
+data <- read_csv("C:/Github Repos/data-science-tutorial/Lab Test 2 Prep/src/dummy_articles.csv", show_col_types = FALSE)
 
 # Drop NA or empty texts
 data <- data[!is.na(data$article_text) & data$article_text != "", ]

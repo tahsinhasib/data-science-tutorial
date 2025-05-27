@@ -6,7 +6,7 @@ library(wordcloud)
 library(RColorBrewer)
 
 # Step 1: Read the CSV file
-data <- read_csv("C:/Github Repos/data-science-tutorial/Lab Test 2 Prep/src/dstar-copy-test.csv", show_col_types = FALSE)
+data <- read_csv("C:/Github Repos/data-science-tutorial/Lab Test 2 Prep/src/dummy_articles.csv", show_col_types = FALSE)
 
 # Step 2: Extract article_text column and combine all text into one string
 text_data <- data$article_text
